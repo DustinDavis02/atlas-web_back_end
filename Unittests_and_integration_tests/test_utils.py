@@ -2,7 +2,8 @@
 """Unittests for utils module."""
 import unittest
 from parameterized import parameterized
-from utils import access_nested_map
+from utils import access_nested_map, get_json
+from unittest.mock import patch, Mock
 
 class TestAccessNestedMap(unittest.TestCase):
     """Testing function access_nested_map."""
@@ -28,3 +29,16 @@ class TestAccessNestedMap(unittest.TestCase):
         self.assertEqual(str(context.exception).strip("'"), expected_message)
 
 
+class TestGetJson(unittest.TestCase):
+    """Testing function get_json."""
+
+    @parameterized.expand([
+        ("http://example.com", {"payload": True}),
+        ("http://holberton.io", {"payload": False}),
+    ])
+    def test_get_json(self, test_url, test_payload):
+        """Testing get_json returns expected result without making HTTP calls."""
+        with patch('requests.get') as mock_requests_get:
+            mock_requests_get.return_value = Mock(json=lambda: test_payload)
+            self.assertEqual(get_json(test_url), test_payload)
+            mock_requests_get.assert_called_once_with(test_url)
