@@ -22,7 +22,10 @@ class TestAccessNestedMap(unittest.TestCase):
         ({}, ("a",), "a"),
         ({"a": 1}, ("a", "b"), "b")
     ])
-    def test_access_nested_map_exception(self, nested_map, path, expected_message):
+    def test_access_nested_map_exception(self,
+                                         nested_map,
+                                         path,
+                                         expected_message):
         """Testing the function raises KeyError for specific inputs."""
         with self.assertRaises(KeyError) as context:
             access_nested_map(nested_map, path)
@@ -58,7 +61,7 @@ class TestMemoize(unittest.TestCase):
                 return self.a_method()
 
         with patch.object(TestClass,
-                          'a_method', 
+                          'a_method',
                           return_value=42) as mocked_method:
             test_instance = TestClass()
             first_result = test_instance.a_property
