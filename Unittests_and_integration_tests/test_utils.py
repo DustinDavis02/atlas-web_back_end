@@ -22,8 +22,7 @@ class TestAccessNestedMap(unittest.TestCase):
         ({}, ("a",), "a"),
         ({"a": 1}, ("a", "b"), "b")
     ])
-    def test_access_nested_map_exception(self,
-        nested_map, path, expected_message):
+    def test_access_nested_map_exception(self, nested_map, path, expected_message):
         """Testing the function raises KeyError for specific inputs."""
         with self.assertRaises(KeyError) as context:
             access_nested_map(nested_map, path)
@@ -38,7 +37,7 @@ class TestGetJson(unittest.TestCase):
         ("http://holberton.io", {"payload": False}),
     ])
     def test_get_json(self, test_url, test_payload):
-        """Testing get_json returns expected result without making HTTP calls."""
+        """Testing get_json returns expected result without HTTP calls."""
         with patch('requests.get') as mock_requests_get:
             mock_requests_get.return_value = Mock(json=lambda: test_payload)
             self.assertEqual(get_json(test_url), test_payload)
@@ -58,7 +57,9 @@ class TestMemoize(unittest.TestCase):
             def a_property(self):
                 return self.a_method()
 
-        with patch.object(TestClass, 'a_method', return_value=42) as mocked_method:
+        with patch.object(TestClass,
+                          'a_method', 
+                          return_value=42) as mocked_method:
             test_instance = TestClass()
             first_result = test_instance.a_property
             second_result = test_instance.a_property
