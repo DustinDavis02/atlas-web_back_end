@@ -1,0 +1,20 @@
+# Use Ubuntu 18.04 as the base image
+FROM ubuntu:18.04
+
+# Install Node.js 12.x, Vim, Emacs, and other dependencies
+RUN apt-get update && \
+    apt-get install -y curl vim emacs && \
+    curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
+    apt-get install -y nodejs
+
+# Set the working directory in the container
+WORKDIR /usr/src/app
+
+# Copy your project files into the Docker image
+COPY . /usr/src/app
+
+# Install your project dependencies
+RUN npm install
+
+# Expose the port your app runs on
+EXPOSE 3000
