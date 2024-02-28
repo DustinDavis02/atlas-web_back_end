@@ -3,4 +3,4 @@ function displayMessage(message) {
   console.log(message);
 }
 
-export default displayMessage;
+module.exports = displayMessage;
