@@ -37,7 +37,7 @@ const app = http.createServer(async (req, res) => {
       const message = await countStudents(process.argv[2]);
       res.end(`This is the list of our students\n${message}`);
     } catch (error) {
-      res.end(error.message);
+      res.end(`This is the list of our students\n${error.message}`);
     }
   }
 });
