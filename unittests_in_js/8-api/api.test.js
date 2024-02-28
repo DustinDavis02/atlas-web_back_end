@@ -1,17 +1,13 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const server = require('./api');
-const { expect } = chai;
-
+const expect = chai.expect;
 chai.use(chaiHttp);
 
-describe('Index page', function() {
-  after(() => {
-    server.close();
-  });
+const serverAddress = 'http://localhost:7865';
 
-  it('should check that the GET / route exists', function(done) {
-    chai.request(server)
+describe('Index page', () => {
+  it('should return status 200', (done) => {
+    chai.request(serverAddress)
       .get('/')
       .end((err, res) => {
         expect(res).to.have.status(200);
@@ -19,9 +15,8 @@ describe('Index page', function() {
       });
   });
 
-
-  it('should return the welcome message "Welcome to the payment system"', function(done) {
-    chai.request(server)
+  it('should return the correct content', (done) => {
+    chai.request(serverAddress)
       .get('/')
       .end((err, res) => {
         expect(res.text).to.equal('Welcome to the payment system');
