@@ -26,7 +26,6 @@ function countStudents(path) {
     Object.entries(fields).forEach(([field, { count, names }]) => {
       console.log(`Number of students in ${field}: ${count}. List: ${names.join(', ')}`);
     });
-
 } catch (err) {
     throw new Error('Cannot load the database');
   }
