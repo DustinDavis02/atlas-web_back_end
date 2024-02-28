@@ -10,14 +10,22 @@ describe('Index page', function() {
     server.close();
   });
 
-  it('should return the welcome message with correct status code', function(done) {
+  it('should check that the GET / route exists', function(done) {
     chai.request(server)
       .get('/')
       .end((err, res) => {
         expect(res).to.have.status(200);
-        expect(res.text).to.equal('Welcome to the payment system');
         done();
       });
   });
 
+
+  it('should return the welcome message "Welcome to the payment system"', function(done) {
+    chai.request(server)
+      .get('/')
+      .end((err, res) => {
+        expect(res.text).to.equal('Welcome to the payment system');
+        done();
+      });
+  });
 });
