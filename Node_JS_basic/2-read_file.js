@@ -3,11 +3,8 @@ const fs = require('fs');
 function countStudents(path) {
   try {
     const data = fs.readFileSync(path, { encoding: 'utf8' });
-
     const lines = data.split('\n').filter(Boolean);
-
     const students = lines.slice(1);
-
     const fields = {};
 
     students.forEach((student) => {
